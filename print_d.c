@@ -1,42 +1,39 @@
 #include "main.h"
+#include <stdlib.h>
+
 /**
- * print_d - prints an integer
- * @ap: argument list
- * Return: number of characters printed
+ * print_d - A function that prints a decimal base 10
+ * @i: base 10 integer to print
+ * Return: number of printed digits
  */
-int print_d(va_list ap)
+int print_d(va_list i)
 {
-    int n = va_arg(ap, int);
-    int count = 0;
+	int a[10];
+	int j = 1, m = 1000000000, n, sum = 0, counter = 0;
 
-    if (n < 0)
-    {
-        _putchar('-');
-        count++;
-        n = -n;
-    }
+	n = va_arg(i, int);
+	if (n < 0)
+	{
+		n *= -1;
+		_putchar('-');
+		counter++;
+	}
+	a[0] = n / m;
 
-    char buffer[32];
-    int len = 0;
-    do {
-        buffer[len++] = (n % 10) + '0';
-        n /= 10;
-    } while (n > 0);
+	for (; j < 10; j++)
+	{
+		m /= 10;
+		a[j] = (n / m) % 10;
+	}
 
-    if (len == 0)
-    {
-        _putchar('0');
-        count++;
-    }
-    else
-    {
-        for (int i = len - 1; i >= 0; i--)
-        {
-            _putchar(buffer[i]);
-            count++;
-        }
-    }
-
-    return count;
+	for (j = 0; j < 10; j++)
+	{
+		sum += a[j];
+		if (sum != 0 || j == 9)
+		{
+			_putchar('0' + a[j]);
+			counter++;
+		}
+	}
+	return (counter);
 }
-
