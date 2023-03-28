@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 /**
  * print_S - A function that prints a string, with non-printable
@@ -21,17 +20,18 @@ int print_S(va_list s)
     {
         if (str[i] < 32 || str[i] >= 127)
         {
-            printf("\\x");
+            _putchar('\\');
+            _putchar('x');
             hex = "0123456789ABCDEF";
             j = str[i] / 16;
-            printf("%c", hex[j]);
+            _putchar(hex[j]);
             j = str[i] % 16;
-            printf("%c", hex[j]);
+            _putchar(hex[j]);
             count += 4;
         }
         else
         {
-            putchar(str[i]);
+            _putchar(str[i]);
             count++;
         }
     }
